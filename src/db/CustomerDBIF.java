@@ -6,7 +6,7 @@ import model.Customer;
 
 public interface CustomerDBIF {
 
-	public Customer findCustomerByPhone(String phoneNo);
+	public Customer findCustomerByPhone(String phoneNo) throws DataAccessException ;
 	
 }
 
