@@ -10,7 +10,7 @@ public class Product {
 	private String countryOfOrigin;
 	private int minStock;
 	private Supplier supplier;
-	private ArrayList<Stock> stock;
+	
 	
 	
 	
