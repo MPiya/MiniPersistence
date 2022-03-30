@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Product {
 	
 	private String name;
@@ -7,6 +9,9 @@ public class Product {
 	private double purchasePrice;
 	private String countryOfOrigin;
 	private int minStock;
+	private Supplier supplier;
+	private ArrayList<Stock> stock;
+	
 	
 	
 	public Product(String name, int productID, double purchasePrice, String countryOfOrigin, int minStock) {

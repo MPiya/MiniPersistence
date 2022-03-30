@@ -4,7 +4,7 @@ public class SalesOrderLine {
 private	int quantity;
 private double actuelSalsPrice;
 private int salesOrderLineID;
-
+private Product product;
 private SalesOrderLine(int quantity, double actuelSalsPrice, int salesOrderLineID) {
 	this.quantity= quantity;
 	this.actuelSalsPrice= actuelSalsPrice;

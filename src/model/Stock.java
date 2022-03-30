@@ -1,6 +1,7 @@
 package model;
 
 public class Stock {
+
 	private String locationID;
 	private int stockQuantity;
 	private int minStock;
