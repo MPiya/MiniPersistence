@@ -9,7 +9,7 @@ public interface OrderDBIF {
 	
 	public void addSalesOrderLine(SalesOrderLine newSaleOrderLine);
 	
-	public void saveOrder(OrderLine newOrderLine);
+	public void saveOrder(SalesOrderLine newOrderLine);
 	
 	public boolean update (SaleOrder order);
 }
