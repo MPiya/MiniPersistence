@@ -1,17 +1,18 @@
 package model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class SaleOrder {
 
 	
-	private LocalDate date;
+	private Date date;
 	private String deliveryStatus;
 	private String deliveryDate;
 	private double discount;
 	private int saleOrderID;
 	
-	public SaleOrder(LocalDate date, String deliveryStatus, String deliveryDate, double discount, int saleOrderID) {
+	public SaleOrder(Date date, String deliveryStatus, String deliveryDate, double discount, int saleOrderID) {
 		this.date = date;
 		this.deliveryStatus = deliveryStatus;
 		this.deliveryDate = deliveryDate;
@@ -20,12 +21,12 @@ public class SaleOrder {
 		
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public Date setDate(Date date) {
+		return this.date = date;
 	}
 
 	public String getDeliveryStatus() {

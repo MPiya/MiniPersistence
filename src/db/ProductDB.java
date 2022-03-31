@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ctrl.DataAccessException;
+
 import model.Customer;
 import model.Product;
 import model.SaleOrder;
@@ -15,42 +15,48 @@ import model.SaleOrder;
 
 
 public class ProductDB implements ProductDBIF {
-	private String findProductbyid;
-	private PreparedStatement updateSaleOrder;
 	
+	
+	private static final String find_by_id = "select name, productID, salesPrice, "
+			+ "countryofOrigin, currentStock, "
+			+ "productType, purchasePrice, "
+			+ "location_ID, Supplier_ID  from product where productID=? ";
+private static final String update="select saleOrderID, select deliveryStatus, "
+			+ "select deliveryDate, select discount, "
+			+ "select deliveryDate, "
+			+ "select date where saleOrderID=?";
+
+private String findProductbyid;
+private PreparedStatement updateSaleOrder, findById;
 	
 	public ProductDB() throws SQLException {
 		Connection connection = DBConnection.getInstance().getConnection();
 		
 		try {
-			find_by_id   =DBConnection.getInstance().getConnection()
-					.prepareStatement(findProductbyid);
+			findById =DBConnection.getInstance().getConnection()
+					.prepareStatement(find_by_id);
 			
-			update =DBConnection.getInstance().getConnection().prepareStatement(updateSaleOrder);
+			updateSaleOrder =DBConnection.getInstance().getConnection().prepareStatement(update);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
 		}
 	}
 	
-	private static final String find_by_id = "select productID, salesPrice, "
-										+ "countryOfOrigin, currentStock, "
-										+ "productType, purchasePrice, "
-										+ "location_ID, Supplier_ID  where productID=? ";
-	private static final String update="select saleOrderID, select deliveryStatus, "
-										+ "select deliveryDate, select discount, "
-										+ "select deliveryDate, "
-										+ "select date where saleOrderID=?";
 	
-	public Product findProductbyid(int productID)throws SQLException {
+	
+	public Product findProductById(int productID)throws SQLException {
 		Product product = null;
 		try {
-			findProductbyid.setInt(1, productID);
-			ResultSet rs = findProductbyid.executeQuery();
+			findById.setInt(1, productID);
+			ResultSet rs = findById.executeQuery();
 			if (rs.next()) {
 				product = buildObject(rs);
+				
+				System.out.println("Object is created");
 			}
 		} catch (SQLException e) {
+			System.out.println("Error");
 			e.printStackTrace();
 		}
 		return product;
@@ -60,19 +66,14 @@ public class ProductDB implements ProductDBIF {
 	
 
 	private Product buildObject(ResultSet rs) throws SQLException {
-		Product product = new Product();
-		try {
-			
-			product.setName(rs.getString("product name"));
-			product.setProductID (rs.getInt("Product ID"));
-			product.setPurchasePrice(rs.getDouble("Purchase Price"));
-			product.setCountryOfOrigin(rs.getString("Country Of Origin"));
-			product.setMinStock(rs.getInt("Min Stock"));
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-		}
+		Product product = new Product(
+				rs.getString("name"),
+				rs.getInt("productID"),
+				rs.getDouble("salesPrice"),
+				rs.getString("countryofOrigin"),
+				rs.getInt("currentStock")
+
+		);
 		return product;
 	}
 	
@@ -83,11 +84,13 @@ public class ProductDB implements ProductDBIF {
 		}
 		return prodoct;
 	}
+	
+	/*
 	public boolean update (SaleOrder saleOrder) throws SQLException{
-	try (Connection connection = getConnection();
+	try 
 			    {
 			    	updateSaleOrder.setInt(1, saleOrder.getSaleOrderID());
-			    	updateSaleOrder.setLocalDate(2, saleOrder.getDate());
+			    	updateSaleOrder.setDate(2, saleOrder.getDate());
 			    	updateSaleOrder.setString(3, saleOrder.getDeliveryDate());
 			    	updateSaleOrder.setDouble(4, saleOrder.getDiscount());
 			    	updateSaleOrder.setString(5, saleOrder.getDeliveryStatus());
@@ -96,6 +99,12 @@ public class ProductDB implements ProductDBIF {
 			  throw new SQLException(ex.getMessage(), ex);
 			 }
 			}
-
+*/
+	
+	public static void main(String[] args) throws SQLException {
+		ProductDB c = new ProductDB();
+		c.findProductById(6);
+		
+	}
 	
 }
