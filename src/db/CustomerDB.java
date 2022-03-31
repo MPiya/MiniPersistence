@@ -18,7 +18,8 @@ public class CustomerDB implements CustomerDBIF {
 		private static final String createCustomer = "INSERT INTO customer (fname, lname,zipcode,city,phoneno,isClupType,address)	 "
 				+ "values (?, ?, ?,?,?,?,?)";
 		private static final String deleteCustomer = " Delete from customer where cid = ? ";
-		private PreparedStatement createCus, findCBP, showCus, deleteCus;
+		private static final String updateAddress = " update customer set address = ? from customer where cid = ? ";
+		private PreparedStatement createCus, findCBP, showCus, deleteCus , updateAds;
 		
 
 		public CustomerDB () throws DataAccessException {
@@ -32,6 +33,8 @@ public class CustomerDB implements CustomerDBIF {
 						.prepareStatement(createCustomer);
 				deleteCus =  DBConnection.getInstance().getConnection()
 						.prepareStatement(deleteCustomer);
+				updateAds = DBConnection.getInstance().getConnection()
+						.prepareStatement(updateAddress);
 				
 			} catch (SQLException e) {
 			 System.out.println("ERROR");
@@ -107,19 +110,30 @@ public class CustomerDB implements CustomerDBIF {
 		
 			}
 		
+		public void updateAddress(String address, int c) throws SQLException {
+			updateAds.setString(1, address);
+			updateAds.setInt(2, c);
+			updateAds.executeUpdate();
+		}
+		
 		public void deleteCustomerbyID(int cid)throws SQLException {
 			deleteCus.setInt(1, cid);
 			deleteCus.executeUpdate();
 			
 		}
 		
+	
+		
+		
+		/*
 public static void main(String[] args) throws SQLException,DataAccessException {
 	CustomerDB c = new CustomerDB();
 	
 	//		c.findCustomerByPhone("22222");
 	c.showMe();
 	c.deleteCustomerbyID(11);
-}
+	c.updateAddress("Homie", 1);
+} */ 
 }
 
 
