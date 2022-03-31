@@ -49,11 +49,10 @@ public class CustomerDB implements CustomerDBIF {
 
 				a = buildCusObject(rs);
 								
-				
 				}}
 			catch (SQLException e ) {
 				System.out.println( " No found id = " + phoneNo);
-				throw new DataAccessException(e, "Could not find by id = " + phoneNo);
+				
 									}
 			return a;
 				}
