@@ -66,7 +66,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			}
 			
 		} catch (SQLException e) {
-			throw new DataAccessException( e,);
+			throw new DataAccessException( e, "Could not save sale order lines");
 		}
 	}
 	
