@@ -3,6 +3,7 @@ package view;
 import java.sql.SQLException;
 
 import controller.CustomerCtr;
+import controller.ProductCtr;
 import db.DataAccessException;
 
 public class Tryme {
@@ -14,10 +15,18 @@ public class Tryme {
 	
 	public static void main(String[] args)  throws DataAccessException, SQLException {
 		CustomerCtr b = new CustomerCtr();
-		// work fine
+		ProductCtr p = new ProductCtr();
+		/* work fine
 		b.deleteCustomerById(9);
+		*/
 		
+		/* work fine
+		b.findCustomerByPhone("004511223344");
+		*/
 		
+		/* Work fine
+		p.findProductById(6); 
+		*/
 	}
 	
 }
