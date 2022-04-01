@@ -41,6 +41,9 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			o.setSaleOrderID(id);
 			
 			insertOrderlines(o);
+			
+			DBConnection con = DBConnection.getInstance();
+			con.disconnect();
 		} catch (SQLException e) {
 			throw new DataAccessException("Could not save sale order",e);
 		}
