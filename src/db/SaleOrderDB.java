@@ -14,8 +14,9 @@ import model.SalesOrderLine;
 
 public class SaleOrderDB implements SaleOrderDBIF {
 	
-	private static final String INSERT_SALEORDER_Q = "insert into saleorder values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String INSERT_SALEORDERLINE_Q = "insert into salesOrderLines values (?, ?, ?, ?, ?)";
+	private static final String INSERT_SALEORDER_Q = "insert into saleorder (dato, deliveryStatus, deliveryDato, discount, customer_id, paymentdate) " 
+													+ "values (?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_SALEORDERLINE_Q = "insert into salesOrderLines (order_id, productt_ID, quantity, actuelSalsPrice) values (?, ?, ?, ?)";
 	
 	private PreparedStatement insertPS, insertPSsol;
 	
@@ -25,7 +26,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			insertPS = con.prepareStatement(INSERT_SALEORDER_Q, PreparedStatement.RETURN_GENERATED_KEYS);
 			insertPSsol = con.prepareStatement(INSERT_SALEORDERLINE_Q);
 		} catch (SQLException e) {
-			throw new DataAccessException(e, "Could not prepare SaleOrder prepared statement");
+			throw new DataAccessException("Could not prepare SaleOrder prepared statement", e);
 		}
 	}
 
@@ -36,20 +37,18 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			insertPS.setString(2, o.getDeliveryStatus());
 			insertPS.setString(3, o.getDeliveryDate().toString());
 			insertPS.setDouble(4, o.getDiscount());
-			//5 SaleOrcerID
-			insertPS.setInt(6, o.getCustomer().getCid()); //6 Cid
-			insertPS.setString(7, o.getPaymentDate().toString()); //7 invoiceno
-			insertPS.setDouble(8, o.getAmount());
+			insertPS.setInt(5, o.getCustomer().getCid()); 
+			insertPS.setString(6, o.getPaymentDate().toString());
+			//insertPS.setDouble(7, o.getAmount());
 			
 			//insertPS.executeUpdate();
 			int id = DBConnection.getInstance().executeInsertWithIdentity(insertPS);
 			
 			o.setSaleOrderID(id);
 			
-			
 			insertOrderlines(o);
 		} catch (SQLException e) {
-			throw new DataAccessException(e,"Could not save sale order");
+			throw new DataAccessException("Could not save sale order",e);
 		}
 	}
 	
@@ -68,7 +67,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			}
 			
 		} catch (SQLException e) {
-			throw new DataAccessException( e, "Could not save sale order lines");
+			throw new DataAccessException( "Could not save sale order lines", e);
 		}
 	}
 	
