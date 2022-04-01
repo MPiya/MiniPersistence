@@ -47,7 +47,7 @@ public class Tryme {
 		Product pr2 = p.findProductById(5);
 		
 		SalesOrderLine sol = o.createSalesOrderLineAddProduct(2, 1000, pr);
-		SalesOrderLine sol2 = o.createSalesOrderLineAddProduct(2, 1000, pr2);
+		SalesOrderLine sol2 = o.createSalesOrderLineAddProduct(2, 200, pr2);
 		
 		so.addSalesOrderLine(sol);
 		so.addSalesOrderLine(sol2);
