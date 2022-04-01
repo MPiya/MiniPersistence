@@ -10,7 +10,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 	
 	private static final String INSERT_SALEORDER_Q = "insert into saleorder (dato, deliveryStatus, deliveryDato, discount, customer_id, paymentdate) " 
 													+ "values (?, ?, ?, ?, ?, ?)";
-	private static final String INSERT_SALEORDERLINE_Q = "insert into salesOrderLines (order_id, productt_ID, quantity, actuelSalsPrice) values (?, ?, ?, ?)";
+	private static final String INSERT_SALEORDERLINE_Q = "insert into salesOrderLine (order_id, productt_ID, quantity, actuelSalsPrice) values (?, ?, ?, ?)";
 	
 	private PreparedStatement insertPS, insertPSsol;
 	

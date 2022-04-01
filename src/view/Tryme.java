@@ -35,24 +35,25 @@ public class Tryme {
 		p.findProductById(6); 
 		*/
 		
-		
+		//Create dates to send to SaleOrder constructor
 		String date = "2022-08-16";
 		String dDate = "2022-12-30";
         LocalDate sDate = LocalDate.parse(date);
         LocalDate eDate = LocalDate.parse(dDate);
-		
+        LocalDate pDate = LocalDate.parse(date);
+		//Find customer and create a sales order object
 		Customer cus = c.findCustomerByPhone("004511223344");
-		SaleOrder so = o.createSalesOrderAddCustomer(sDate, "Ikke sendt", eDate, 0.0, cus, 2400);
-		
-		Product pr = p.findProductById(6);
-		Product pr2 = p.findProductById(5);
-		
+		SaleOrder so = o.createSalesOrderAddCustomer(sDate, "Ikke sendt", eDate, 0.0, cus, pDate);
+		//Find products
+		Product pr = p.findProductById(8832);
+		Product pr2 = p.findProductById(11122);
+		//create order line and add the products
 		SalesOrderLine sol = o.createSalesOrderLineAddProduct(2, 1000, pr);
 		SalesOrderLine sol2 = o.createSalesOrderLineAddProduct(2, 200, pr2);
-		
+		//build the complete order object
 		so.addSalesOrderLine(sol);
 		so.addSalesOrderLine(sol2);
-		
+		//save the order
 		o.saveOrder(so);
 		
 				

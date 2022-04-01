@@ -18,8 +18,8 @@ public class SaleOrderController {
 		this.saleOrderDB = new SaleOrderDB();
 	}
 	
-	public SaleOrder createSalesOrderAddCustomer(LocalDate date, String deliveryStatus, LocalDate deliveryDate, double discount, Customer customer, double amount) {
-		SaleOrder o = new SaleOrder(date, deliveryStatus, deliveryDate, discount, customer, amount);
+	public SaleOrder createSalesOrderAddCustomer(LocalDate date, String deliveryStatus, LocalDate deliveryDate, double discount, Customer customer, LocalDate paymentDate) {
+		SaleOrder o = new SaleOrder(date, deliveryStatus, deliveryDate, discount, customer, paymentDate);
 		return o;
 	}
 	

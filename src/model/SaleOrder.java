@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -16,14 +17,15 @@ public class SaleOrder {
 	private double amount;
 	private int saleOrderID;
 	
-	public SaleOrder(LocalDate date, String deliveryStatus, LocalDate deliveryDate, double discount, Customer customer, double amount) {
+	public SaleOrder(LocalDate date, String deliveryStatus, LocalDate deliveryDate, double discount, Customer customer, LocalDate paymentDate) {
 		this.date = date;
 		this.deliveryStatus = deliveryStatus;
 		this.deliveryDate = deliveryDate;
 		this.discount = discount;
 		this.customer = customer;
 		this.sOrderLines = new ArrayList<>();
-		this.amount = amount;
+		this.paymentDate = paymentDate;
+		//this.amount = amount;
 	}
 	
 	public int getSaleOrderID() {
