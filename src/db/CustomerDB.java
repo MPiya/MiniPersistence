@@ -116,7 +116,7 @@ public class CustomerDB implements CustomerDBIF {
 			updateAds.executeUpdate();
 		}
 		
-		public void deleteCustomerbyID(int cid)throws SQLException {
+		public void deleteCustomerById(int cid) throws SQLException {
 			deleteCus.setInt(1, cid);
 			deleteCus.executeUpdate();
 			

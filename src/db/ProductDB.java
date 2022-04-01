@@ -52,7 +52,6 @@ private PreparedStatement updateSaleOrder, findById;
 			ResultSet rs = findById.executeQuery();
 			if (rs.next()) {
 				product = buildObject(rs);
-				
 				System.out.println("Object is created");
 			}
 		} catch (SQLException e) {
@@ -65,7 +64,7 @@ private PreparedStatement updateSaleOrder, findById;
 	
 	
 
-	private Product buildObject(ResultSet rs) throws SQLException {
+	public Product buildObject(ResultSet rs) throws SQLException {
 		Product product = new Product(
 				rs.getString("name"),
 				rs.getInt("productID"),
