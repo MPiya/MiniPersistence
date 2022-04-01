@@ -23,7 +23,7 @@ public class SaleOrderDB implements SaleOrderDBIF {
 		Connection con = DBConnection.getInstance().getConnection();
 		try {
 			insertPS = con.prepareStatement(INSERT_SALEORDER_Q, PreparedStatement.RETURN_GENERATED_KEYS);
-			insertPSsol = con.prepareStatement(INSERT_SALEORDERLINE_Q, PreparedStatement.RETURN_GENERATED_KEYS);
+			insertPSsol = con.prepareStatement(INSERT_SALEORDERLINE_Q);
 		} catch (SQLException e) {
 			throw new DataAccessException(e, "Could not prepare SaleOrder prepared statement");
 		}
@@ -59,14 +59,16 @@ public class SaleOrderDB implements SaleOrderDBIF {
 			
 			for(int i = 0; i < size; i++ ) {
 				SalesOrderLine currSol = o.getSalesOrderLines().get(i);
+				
 				insertPSsol.setInt(1, o.getSaleOrderID());
 				insertPSsol.setInt(2, currSol.getProduct().getProductID());
 				insertPSsol.setInt(3, currSol.getQuantity());
 				insertPSsol.setDouble(4, currSol.getActuelSalsPrice());
+				insertPSsol.executeUpdate();
 			}
 			
 		} catch (SQLException e) {
-			throw new DataAccessException( e,);
+			throw new DataAccessException( e, "Could not save sale order lines");
 		}
 	}
 	

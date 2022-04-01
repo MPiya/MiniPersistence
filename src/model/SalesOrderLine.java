@@ -36,12 +36,4 @@ public class SalesOrderLine {
 		this.actuelSalsPrice = actuelSalsPrice;
 	}
 
-	public int getSalesOrderLineID() {
-		return salesOrderLineID;
-	}
-
-	public void setSalesOrderLineID(int salesOrderLineID) {
-		this.salesOrderLineID = salesOrderLineID;
-	}
-
 }
